@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string-array name="akt_profiles">
-		<item>Stock</item>
+		<item>Return to Stock (need reboot)</item>
 		<item>[BAT] Nameless Battery by @Senthil360</item>
 		<item>[BAT] FairPark by @Asiier</item>
 		<item>[BAT] Fusion Conservative by @patalao</item>
