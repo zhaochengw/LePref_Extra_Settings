@@ -33,14 +33,14 @@ public class LePrefSettings extends PreferenceActivity implements OnPreferenceCh
 	private static final boolean DEBUG = false;
 	private static final String TAG = "LePref";
 	private static final String ENABLE_QC_KEY = "qc_setting";
-	private static final String ENABLE_HAL3_KEY = "hal3";
+//	private static final String ENABLE_HAL3_KEY = "hal3";
 	private static final String AKT_KEY = "akt";
 	private static final String QC_SYSTEM_PROPERTY = "persist.sys.le_fast_chrg_enable";
-	private static final String HAL3_SYSTEM_PROPERTY = "persist.camera.HAL3.enabled";
+//	private static final String HAL3_SYSTEM_PROPERTY = "persist.camera.HAL3.enabled";
 	private static final String AKT_SYSTEM_PROPERTY = "persist.AKT.profile";
 
 	private SwitchPreference mEnableQC;
-	private SwitchPreference mEnableHAL3;
+//	private SwitchPreference mEnableHAL3;
 	private ListPreference mAKT;
 
     private Context mContext;
@@ -56,9 +56,9 @@ public class LePrefSettings extends PreferenceActivity implements OnPreferenceCh
         mEnableQC.setChecked(SystemProperties.getBoolean(QC_SYSTEM_PROPERTY, false));
         mEnableQC.setOnPreferenceChangeListener(this);
                 
-        mEnableHAL3 = (SwitchPreference) findPreference(ENABLE_HAL3_KEY);
-        mEnableHAL3.setChecked(SystemProperties.getBoolean(HAL3_SYSTEM_PROPERTY, false));
-        mEnableHAL3.setOnPreferenceChangeListener(this);
+//        mEnableHAL3 = (SwitchPreference) findPreference(ENABLE_HAL3_KEY);
+//        mEnableHAL3.setChecked(SystemProperties.getBoolean(HAL3_SYSTEM_PROPERTY, false));
+//        mEnableHAL3.setOnPreferenceChangeListener(this);
         
         mAKT = (ListPreference) findPreference(AKT_KEY);
         mAKT.setValue(SystemProperties.get(AKT_SYSTEM_PROPERTY, "Stock"));
@@ -101,38 +101,18 @@ public class LePrefSettings extends PreferenceActivity implements OnPreferenceCh
 		}
 		SystemProperties.set(AKT_SYSTEM_PROPERTY, value);
     }
-   
+ 
+/* 
     // Control Camera2API
     private void setEnableHAL3(boolean value) {
-		try {
-			Process su = Runtime.getRuntime().exec("su");
-			DataOutputStream outputStream = new DataOutputStream(su.getOutputStream());
-			if(value) {
-				outputStream.writeBytes("mount -o remount,rw /system\n");
-				outputStream.writeBytes("cp /system/etc/lepref/cam/hal3/lib/libcameraservice.so /system/lib\n");
-				outputStream.writeBytes("cp /system/etc/lepref/cam/hal3/lib64/libcameraservice.so /system/lib64\n");
-				outputStream.writeBytes("mount -o remount,ro /system\n");
-				SystemProperties.set(HAL3_SYSTEM_PROPERTY, "1");
-			} else {
-				outputStream.writeBytes("mount -o remount,rw /system\n");
-				outputStream.writeBytes("cp /system/etc/lepref/cam/hal1/lib/libcameraservice.so /system/lib\n");
-				outputStream.writeBytes("cp /system/etc/lepref/cam/lib64/libcameraservice.so /system/lib64\n");
-				outputStream.writeBytes("mount -o remount,ro /system\n");
-				SystemProperties.set(HAL3_SYSTEM_PROPERTY, "0");
-			}
-			outputStream.flush();
-			outputStream.writeBytes("exit\n");
-			outputStream.flush();
-			su.waitFor();
-		} catch(IOException e){
-			Toast toast = Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT);
-			toast.show();
-		} catch(InterruptedException e){
-			Toast toast = Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT);
-			toast.show();
-		}
-		if (DEBUG) Log.d(TAG, "HAL3 setting changed");
+	if(value) {
+		SystemProperties.set(HAL3_SYSTEM_PROPERTY, "1");
+	} else {
+		SystemProperties.set(HAL3_SYSTEM_PROPERTY, "0");
+	}
+	if (DEBUG) Log.d(TAG, "HAL3 setting changed");
     }
+*/
 
     @Override
     protected void onResume() {
@@ -159,11 +139,11 @@ public class LePrefSettings extends PreferenceActivity implements OnPreferenceCh
 			mEnableQC.setChecked(value);
 			setEnableQC(value);
 			return true;
-		} else if (ENABLE_HAL3_KEY.equals(key)) {
-			value = (Boolean) newValue;
-			mEnableHAL3.setChecked(value);
-			setEnableHAL3(value);
-			return true;
+//		} else  if (ENABLE_HAL3_KEY.equals(key)) {
+//			value = (Boolean) newValue;
+//			mEnableHAL3.setChecked(value);
+//			setEnableHAL3(value);
+//			return true;
 		} else if (AKT_KEY.equals(key)) {
 			strvalue = (String) newValue;
 			//mEnableHAL3.setChecked(value);
